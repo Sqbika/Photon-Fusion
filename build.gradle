@@ -1,0 +1,60 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url = "http://files.minecraftforge.net/maven" }
+        maven { url = 'https://oss.sonatype.org/content/groups/public' }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+	classpath 'com.matthewprenger:CurseGradle:1.0-SNAPSHOT'
+    }
+}
+repositories {
+    maven {
+        url = "http://dvs1.progwml6.com/files/maven"
+    }
+}
+apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'com.matthewprenger.cursegradle'
+//Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
+
+
+version = "0.1"
+group = "com.sqbika.photonfusion" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "photonfusion"
+
+sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+compileJava {
+    sourceCompatibility = targetCompatibility = '1.8'
+}
+
+minecraft {
+    version = "1.12.2-14.23.3.2670"
+    runDir = "run"
+    mappings = "snapshot_20171003"    
+}
+
+dependencies {
+
+	deobfCompile "mezz.jei:jei_1.12.2:4.8.5.+:api"
+	runtime "mezz.jei:jei_1.12.2:4.8.5.+"
+}
+
+processResources {
+    // this will ensure that this task is redone when the versions change.
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    // replace stuff in mcmod.info, nothing else
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+                
+        // replace version and mcversion
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+        
+    // copy everything else except the mcmod.info
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}

@@ -1,0 +1,16 @@
+[
+{
+  "modid": "photonfusion",
+  "name": "Photon Fusion",
+  "description": "Using the light an unnormal way.",
+  "version": "0.1",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Sqbika"],
+  "credits": "The Forge and FML guys",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
